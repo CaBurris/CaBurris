@@ -127,6 +127,12 @@ function update(){
     else if(direction == 2)
         snakeX++;
     set(snakeX, snakeY, "snake");
+    for(var i = tailX.length-1; i>= 0; i--){
+        if(snakeX == tailX[i] && snakeY == tailY[i]){
+            gameOver = true;
+            break;
+        }
+    }
     if(snakeX == 0 || snakeX == width-1 || snakeY == 0 || snakeY == height-1)
         gameOver = true;
     else if(snakeX == fx && snakeY == fy){
