@@ -4,10 +4,11 @@ var snakeY = 2;
 var height = 30;
 var width = 30;
 var interval = 100;
-var increment = 1;
+var increment = 4;
 
 
 //game variables
+var length = 0;
 var tailX = [snakeX];
 var tailY = [snakeY];
 var fx;
@@ -16,7 +17,7 @@ var running = false;
 var gameOver = false;
 var direction = -1 //up = 0, down = -1, left = 1, right = 2
 var int;
-
+var score = 0;
 /**
 *entry point of the game
 */
@@ -115,6 +116,7 @@ function gameLoop(){
 
 function update(){
     set(fx, fy, "fruit");
+    updateTail();
     set(tailX[length], tailY[length], "blank");
     if(direction == 0)
         snakeY--;
@@ -125,6 +127,14 @@ function update(){
     else if(direction == 2)
         snakeX++;
     set(snakeX, snakeY, "snake");
+    if(snakeX == 0 || snakeX == width-1 || snakeY == 0 || snakeY == height-1)
+        gameOver = true;
+    else if(snakeX == fx && snakeY == fy){
+        score+=4;
+        createFruit();
+        length+=increment;
+    }
+    document.getElementById("score").innerHTML  = "Score: " + score;
 }
 
 function updateTail(){
