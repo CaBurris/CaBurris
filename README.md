@@ -1,2 +1,2 @@
-# CaBurris
+
 JavaScript Snake Game
